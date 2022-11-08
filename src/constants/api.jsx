@@ -1,0 +1,1 @@
+export const BASE_URL = "https://project-exam-resit.herokuapp.com/api/products";
