@@ -1,6 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
-import { BASE_URL } from "./constants/api";
+import { BASE_URL } from "../constants/api";
+import { Container } from "react-bootstrap";
+import { AiOutlineHeart } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -11,7 +14,7 @@ function Products() {
     async function fetchProducts() {
       try {
         const response = await fetch(BASE_URL);
-        
+
         if (response.ok) {
           const json = await response.json();
           console.log(json.data);
@@ -38,16 +41,23 @@ function Products() {
 
   return (
     <>
-      <div className="products-container">
+      <Container className="container">
         {products.map(function (product) {
           return (
-            <div className="products-container" key={product.attributes.id}>
-              <img src={product.attributes.image.data[0].attributes.url} alt="" className="product-img" />
-              <p key={product.attributes.name}>{product.attributes.name}</p>
+            <div className="products-container" key={product.id}>
+              <img src={product.attributes.image.data[0].attributes.url} alt="This is the product cover" className="product-img" />
+              <AiOutlineHeart className="fav-button" />
+              <div className="title-tag">
+              <p key={product.attributes.title}>{product.attributes.title}</p>
+              </div>
+              <div className="link-tag">
+              <Link to={`product/${product.id}`} className="link-page">View more</Link>
+              </div>
             </div>
           );
         })}
-      </div>
+
+      </Container>
     </>
   );
 }
