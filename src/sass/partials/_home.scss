@@ -1,7 +1,7 @@
 .App-logo {
   width: 250px;
   height: auto;
-  margin: 5px;
+  margin-left: 345px;
 }
 
 .img-slider {
@@ -13,8 +13,8 @@
 .browse-button {
   position: relative;
   float: right;
-  width: 55px;
-  height: 25px;
+  width: auto;
+  height: auto;
   background-color: $button-color;
   margin-right: 20px;
   margin-bottom: 20px;
@@ -23,6 +23,8 @@
 
 .browse-link {
   color:$text-color;
+  text-decoration: none;
+  padding: 5px;
 }
 
 @import '~bootstrap/scss/bootstrap.scss';

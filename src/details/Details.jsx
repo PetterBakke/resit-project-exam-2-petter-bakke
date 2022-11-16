@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Details_url } from "../constants/api";
+import { AiOutlineHeart } from "react-icons/ai";
 
 function PageDetail() {
   const [product, setProduct] = useState({});
@@ -33,13 +34,16 @@ function PageDetail() {
 
   return (
     <>
-        <div className='page-detail'>
-         <img src={product.data.attributes.image.data[0].attributes.url} alt="This is the product cover" className="detail-img" />
-         <p key={product.id} className="p-description">{product.data.attributes.description}</p>
-         <div className='subgrid'>
-         <p key={product.data.attributes.title} className="p-title">{product.data.attributes.title}</p>
-         </div>
-        </div>    
+      <div className='page-detail'>
+        <div>
+          <img src={product.data.attributes.image.data[0].attributes.url} alt="This is the product cover" className="product-img" />
+          <AiOutlineHeart className="fav-button" />
+          <p key={product.data.attributes.title} className="p-title">{product.data.attributes.title}</p>
+        </div>
+        <div className='subgrid'>
+          <h5 className='heading-description'>{product.data.attributes.description}</h5>
+        </div>
+      </div>
     </>
   );
 }

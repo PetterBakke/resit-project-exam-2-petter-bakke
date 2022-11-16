@@ -8,6 +8,7 @@ import space from '../../src/assets/Space adventure.png';
 function Home() {
   return (
     <>
+    
         <Carousel className='img-slider'>
           <Carousel.Item>
             <img className="d-flex justify-content-center" width={300} height={450}
@@ -29,6 +30,8 @@ function Home() {
           </Carousel.Item>
         </Carousel>
         <div className='browse-button'>
+          <Link to="/login" className='browse-link'>Login |</Link>
+          <Link to="/register" className='browse-link'>Register |</Link>
           <Link to="/products" className='browse-link'>Browse</Link>
         </div>
     </>

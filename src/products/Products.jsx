@@ -45,10 +45,12 @@ function Products() {
         {products.map(function (product) {
           return (
             <div className="products-container" key={product.id}>
+              <div>
               <img src={product.attributes.image.data[0].attributes.url} alt="This is the product cover" className="product-img" />
               <AiOutlineHeart className="fav-button" />
+              </div>
               <div className="title-tag">
-              <p key={product.attributes.title}>{product.attributes.title}</p>
+              <h5 key={product.attributes.title}>{product.attributes.title}</h5>
               </div>
               <div className="link-tag">
               <Link to={`product/${product.id}`} className="link-page">View more</Link>
