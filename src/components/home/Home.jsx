@@ -1,9 +1,9 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { Link } from "react-router-dom";
-import neon from '../../src/assets/Neon city.png';
-import golf from '../../src/assets/The golf.png';
-import space from '../../src/assets/Space adventure.png';
+import neon from '../../assets/Neon city.png';
+import golf from '../../assets/The golf.png';
+import space from '../../assets/Space adventure.png';
 
 function Home() {
   return (

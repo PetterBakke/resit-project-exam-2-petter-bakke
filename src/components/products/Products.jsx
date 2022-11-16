@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { BASE_URL } from "../constants/api";
+import { BASE_URL } from "../../constants/api";
 import { Container } from "react-bootstrap";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";

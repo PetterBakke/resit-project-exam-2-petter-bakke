@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Details_url } from "../constants/api";
+import { Details_url } from "../../constants/api";
 import { AiOutlineHeart } from "react-icons/ai";
 
 function PageDetail() {

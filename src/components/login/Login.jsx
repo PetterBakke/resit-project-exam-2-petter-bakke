@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState, useContext } from "react";
-import { auth_url } from '../constants/api';
+import { auth_url } from '../../constants/api';
 import * as yup from 'yup';
 import axios from 'axios';
 import FormError from "./FormError";
@@ -22,7 +22,7 @@ function LoginForm() {
     resolver: yupResolver(schema),
   });
 
-  const [ auth, setAuth] = useContext(AuthContext);
+  const [auth, setAuth] = useContext(AuthContext);
 
   async function onSubmit(data) {
     setSubmitting(true);
@@ -47,22 +47,22 @@ function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-          {loginError && <FormError>{loginError}</FormError>}
-          <fieldset disabled={submitting}>
-            <div>
-              <input name="identifier" placeholder="Email" {...register("identifier")} />
-              {errors.identifier && <FormError>{errors.identifier.message}</FormError>}
-              {loggedIn && (<Navigate to="/" replace={true} />)}
-            </div>
+      {loginError && <FormError>{loginError}</FormError>}
+      <fieldset disabled={submitting}>
+        <div>
+          <input name="identifier" placeholder="Email" {...register("identifier")} />
+          {errors.identifier && <FormError>{errors.identifier.message}</FormError>}
+          {loggedIn && (<Navigate to="/" replace={true} />)}
+        </div>
 
-            <div>
-              <input name="password" placeholder="Password" {...register("password")} />
-              {errors.password && <FormError>{errors.password.message}</FormError>}
-            </div>
+        <div>
+          <input name="password" placeholder="Password" {...register("password")} />
+          {errors.password && <FormError>{errors.password.message}</FormError>}
+        </div>
 
-            <button>{submitting ? "Loggin in..." : "Login"}</button>
-          </fieldset>
-        </form>
+        <button>{submitting ? "Loggin in..." : "Login"}</button>
+      </fieldset>
+    </form>
   );
 }
 

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState, useContext } from "react";
-import { auth_url } from '../constants/api';
+import { auth_url } from '../../constants/api';
 import * as yup from 'yup';
 import axios from 'axios';
 import FormError from "../login/FormError";
