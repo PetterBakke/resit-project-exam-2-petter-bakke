@@ -8,10 +8,8 @@ import {
   message,
   Row,
   Spin,
-  Typography,
 } from "antd";
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import useScreenSize from "../../hooks/useScreenSize";
@@ -51,7 +49,7 @@ const SignUp = () => {
 
         message.success(`Welcome to Bits and Bots ${data.user.username}!`);
 
-        navigate("/", { replace: true });
+        navigate("/products", { replace: true });
       }
     } catch (error) {
       console.error(error);
@@ -124,9 +122,6 @@ const SignUp = () => {
                 </Button>
               </Form.Item>
             </Form>
-            <Typography.Paragraph className="form_help_text">
-              Already have an account? <Link to="/signin">Sign In</Link>
-            </Typography.Paragraph>
           </Card>
         </Col>
       </Row>

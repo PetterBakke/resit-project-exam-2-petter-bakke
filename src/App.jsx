@@ -6,6 +6,7 @@ import Home from "../src/components/home/Home";
 import PageDetail from "../src/components/details/Details";
 import SignIn from './components/signin/SignIn';
 import SignUp from "./components/signup/SignUp";
+import Cart from "./components/cart/Cart";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route path="/products/product/:id" element={<PageDetail />} />          
           <Route path="/login" element={<SignIn />} />
           <Route path="/register" element={<SignUp />} />
+          
+          <Route path="/cart" element={<Cart />} />
         </Routes>
     </>
   );

@@ -8,10 +8,8 @@ import {
   message,
   Row,
   Spin,
-  Typography,
 } from "antd";
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import useScreenSize from "../../hooks/useScreenSize";
@@ -32,7 +30,7 @@ const SignIn = () => {
     setIsLoading(true);
     try {
       const value = {
-        identifier: values.email,
+        identifier: values.username,
         password: values.password,
       };
       const response = await fetch(`${API}/auth/local`, {
@@ -55,7 +53,7 @@ const SignIn = () => {
 
         message.success(`Welcome back ${data.user.username}!`);
 
-        navigate("/", { replace: true });
+        navigate("/products", { replace: true });
       }
     } catch (error) {
       console.error(error);
@@ -86,12 +84,12 @@ const SignIn = () => {
               autoComplete="off"
             >
               <Form.Item
-                label="Email"
-                name="email"
+                label="Username"
+                name="username"
                 rules={[
                   {
                     required: true,
-                    type: "email",
+                    type: "username",
                   },
                 ]}
               >
@@ -116,9 +114,6 @@ const SignIn = () => {
                 </Button>
               </Form.Item>
             </Form>
-            <Typography.Paragraph className="form_help_text">
-              New to Social Cards? <Link to="/signup">Sign Up</Link>
-            </Typography.Paragraph>
           </Card>
         </Col>
       </Row>
