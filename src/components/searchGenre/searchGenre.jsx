@@ -26,8 +26,8 @@ const Genres = ({
 
   const fetchGenres = async () => {
     const { data } = await axios.get(BASE_URL);
-    setGenres(data.genre);
-    console.log(data.genre);
+    setGenres(data.genres);
+    console.log(data.genres);
   };
 
   useEffect(() => {

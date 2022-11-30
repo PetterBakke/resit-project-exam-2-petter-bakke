@@ -57,9 +57,9 @@ function Products() {
       <button onClick={clearClick} className="link-tag">Log Out</button>
       <Link to="/cart" className="link-tag">Cart</Link>
       <Container className="container">
-        <div className="search">
+        {/* <div className="search">
           <Genres type="products" selectedGenres={selectedGenres} setSelectedGenres={setSelectedGenres} genres={genres} setGenres={setGenres} />
-        </div>
+        </div> */}
 
         {products.map(function (product) {
           return (
