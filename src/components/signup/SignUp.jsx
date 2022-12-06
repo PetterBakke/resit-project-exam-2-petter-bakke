@@ -13,7 +13,7 @@ import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import useScreenSize from "../../hooks/useScreenSize";
-import { BASE_URL } from "../../constants/api";
+import { API } from "../../constants/api";
 import { setToken } from "../helpers/helpers";
 
 const SignUp = () => {
@@ -29,7 +29,7 @@ const SignUp = () => {
   const onFinish = async (values) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${BASE_URL}/auth/local/register`, {
+      const response = await fetch(`${API}/auth/local/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
