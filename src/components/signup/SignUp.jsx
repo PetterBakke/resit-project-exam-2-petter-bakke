@@ -81,6 +81,7 @@ const SignUp = () => {
             >
               <Form.Item
                 label="Username"
+                className="form-labels"
                 name="username"
                 rules={[
                   {
@@ -93,6 +94,7 @@ const SignUp = () => {
               </Form.Item>
               <Form.Item
                 label="Email"
+                className="form-labels"
                 name="email"
                 rules={[
                   {
@@ -106,6 +108,7 @@ const SignUp = () => {
 
               <Form.Item
                 label="Password"
+                className="form-labels"
                 name="password"
                 rules={[{ required: true }]}
               >
