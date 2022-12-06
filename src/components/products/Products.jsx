@@ -4,7 +4,6 @@ import { BASE_URL } from "../../constants/api";
 import { Container } from "react-bootstrap";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-// import FavLocalStorage from "../localstorage/favLocalStorage";
 import { clearClick } from "../logout/LogOut";
 
 function Products() {
@@ -26,7 +25,7 @@ function Products() {
           setError("An error occured");
         }
       } catch (error) {
-        setError(error.toString());
+        setError(alert("An error has occured"));
       } finally {
         setLoading(false);
       }
