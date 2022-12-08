@@ -9,6 +9,7 @@ import { clearClick } from "../logout/LogOut";
 
 function Products() {
 	const [cart, setCart] = useState([]);
+	const [checked, setChecked] = useState(false);
 	const [genre, setGenre] = useState("");
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -54,24 +55,38 @@ function Products() {
 	};
 	// navigate("/", { replace: true });
 
-	function searchGenre(product) {
-		return product.filter((genre) => {
+	function searchGenre(genre) {
+		return genre.filter((genres) => {
 			return searchParam.some((newGenre) => {
 				return (
-					genre[newGenre].toString().toLowerCase().indexOf(product.toLowerCase()) > -1
-					)
-				})
+					genres[newGenre].toString().toLowerCase().indexOf(genre.toLowerCase())
+				)
 			})
-		}
-		console.log("search Filter: ", genre);
+		})
+	}
+	console.log("search Filter: ", setGenre);
+
+	const handleChange = () => {
+		setChecked(!checked);
+	};
 
 	return (
 		<>
-			<div>
-				<input type="checkbox" label="Action" className="genre-search" value={genre} onClick={(e) => setGenre(e.genre)}></input>
-				<input type="checkbox" label="Sport" className="genre-search" value={genre} onClick={(e) => setGenre(e.genre)}></input>
-				<input type="checkbox" label="Simulation" className="genre-search" value={genre} onClick={(e) => setGenre(e.genre)}></input>
-			</div>
+			<label>
+				<input type="checkbox" checked={checked} onChange={handleChange} className="genre-search" onClick={() => searchGenre(setGenre)} />
+				Action
+			</label>
+
+			<label>
+				<input type="checkbox" checked={checked} onChange={handleChange} className="genre-search" />
+				Sport
+			</label>
+
+			<label>
+				<input type="checkbox" checked={checked} onChange={handleChange} className="genre-search" />
+				Simulation
+			</label>
+
 			<button onClick={clearClick} className="link-tag">
 				Log Out
 			</button>

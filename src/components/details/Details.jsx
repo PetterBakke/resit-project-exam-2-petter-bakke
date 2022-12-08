@@ -55,7 +55,7 @@ function PageDetail() {
     <>
       <div className='page-detail'>
         <div className='flex-child'>
-          <h1 key={product.data.attributes.title} className="p-title">{product.data.attributes.title}</h1>
+          <h1 key={product.data.attributes.title} className="heading">{product.data.attributes.title}</h1>
           <img src={imagePath} alt="This is the product cover" className="product-img" />
           <AiOutlineHeart className="fav-button" onClick={() => addToCart(product)} />
         </div>
