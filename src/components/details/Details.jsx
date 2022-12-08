@@ -2,9 +2,10 @@ import { Details_url, BASE_URI } from "../../constants/api";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Container from 'react-bootstrap/Container';
+
 
 function PageDetail() {
+  const [cart, setCart] = useState([]);
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -41,24 +42,29 @@ function PageDetail() {
   if (error) {
     return <div>ERROR: An error occured</div>;
   }
+  const addToCart = (product) => {
+    localStorage.setItem("Favourites", JSON.stringify(product));
+    console.log("This item is in the cart");
+    setCart([...cart, product]);
+  };
 
   const imagePath = `${BASE_URI}${product.data.attributes.image.data[0].attributes.url}`;
 
   return (
-    <Container>
-      <>
-        <div className='page-detail'>
-          <div>
-            <img src={imagePath} alt="This is the product cover" className="product-img" />
-            <AiOutlineHeart className="fav-button" />
-            <p key={product.data.attributes.title} className="p-title">{product.data.attributes.title}</p>
-          </div>
-          <div className='subgrid'>
-            <h5 className='heading-description'>{product.data.attributes.title}</h5>
-          </div>
+
+    <>
+      <div className='page-detail'>
+        <div className='flex-child'>
+          <h1 key={product.data.attributes.title} className="p-title">{product.data.attributes.title}</h1>
+          <img src={imagePath} alt="This is the product cover" className="product-img" />
+          <AiOutlineHeart className="fav-button" onClick={() => addToCart(product)} />
         </div>
-      </>
-    </Container>
+        <div className='subgrid'>
+          <p className='heading-description'>{product.data.attributes.description}</p>
+        </div>
+      </div>
+    </>
+
   );
 
 }

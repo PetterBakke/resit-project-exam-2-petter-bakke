@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { message } from "antd";
-import { BASE_URL, BEARER } from "../../constants/api";
+import { BASE_URI, BEARER } from "../../constants/api";
 import { useEffect } from "react";
 import { getToken } from "../helpers/helpers";
 
@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
   const fetchLoggedInUser = async (token) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${BASE_URL}/users/me`, {
+      const response = await fetch(`${BASE_URI}/api/users/me`, {
         headers: { Authorization: `${BEARER} ${token}` },
       });
       const data = await response.json();

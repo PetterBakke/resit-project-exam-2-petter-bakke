@@ -1,8 +1,10 @@
 .page-detail {
-  display: grid;
-  grid-template-columns: repeat(2, 2fr);
+  display: flex;
   align-items: center;
+  align-content: center;
+  gap: 10px;
   margin: 10px;
+  flex-wrap: wrap;
 }
 
 .detail-img {
@@ -10,10 +12,13 @@
   height: 250px;
 }
 
-.subgrid {
-  display: grid;
-  grid-template-columns: subgrid;
+.flex-child {
+  align-self: flex-start;
 }
+
+// .subgrid {
+//   order: 2;
+// }
 
 .heading-description {
   color: $ui-color;

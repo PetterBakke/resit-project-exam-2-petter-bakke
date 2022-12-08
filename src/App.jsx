@@ -7,6 +7,7 @@ import PageDetail from "../src/components/details/Details";
 import SignIn from './components/signin/SignIn';
 import SignUp from "./components/signup/SignUp";
 import Cart from './components/cart/Cart';
+import CheckOut from './components/checkout/CheckOut';
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
           <Route path="/products/product/:id" element={<PageDetail />} />          
           <Route path="/login" element={<SignIn />} />
           <Route path="/register" element={<SignUp />} />
-          {/* <Route path="/cart" element={<Cart />} /> */}
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<CheckOut />} />
         </Routes>
     </>
   );

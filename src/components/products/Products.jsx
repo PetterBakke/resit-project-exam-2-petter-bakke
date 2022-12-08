@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { useEffect } from "react";
 import { BASE_URL, BASE_URI } from "../../constants/api";
 import { Container } from "react-bootstrap";
@@ -12,6 +12,8 @@ function Products() {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+
+	// const navigate = useNavigate();
 
 	useEffect(function () {
 		async function fetchProducts() {
@@ -47,13 +49,14 @@ function Products() {
 		console.log("This item is in the cart");
 		setCart([...cart, product]);
 	};
+	// navigate("/", { replace: true });
 
 	return (
 		<>
-			<button onClick={clearClick} className="link-tag">
+			<button onClick={clearClick}  className="link-tag">
 				Log Out
 			</button>
-			<Link to="/cart" className="link-tag">
+			<Link to={`/cart`} className="link-tag">
 				Cart({cart.length})
 			</Link>
 			<Container className="container">

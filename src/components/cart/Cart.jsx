@@ -1,25 +1,18 @@
-// import { useState } from "react";
+import { useState } from "react";
+import { Container } from "react-bootstrap";
 
+function Cart() {
+  // const [favs, setFavs] = useState([]);
+  const cartItems = JSON.parse(localStorage.getItem("Favourites"));
+  console.log(cartItems);
 
+  return (
+    <Container className="container">
+      <h5>{cartItems.attributes.title}</h5>
+      <p>{cartItems.attributes.description}</p>
+      <p>{cartItems.attributes.price}</p>
+    </Container>
+  )
+}
 
-// function Cart() {
-//   const [favs, setFavs] = useState("");
-//   const cartItems = JSON.parse(localStorage.getItem("Favourites"));
-
-//   return (
-
-//     {
-//       favs.map(function (fav) {
-//         return (
-//           <div className="cart-list">
-//             <h5 key={fav.attributes.title}>{fav.attributes.title}</h5>
-//             <p key={fav.id}>{fav.attributes.description}</p>
-//             <p>Price: {fav.attributes.price}</p>
-//           </div>
-//         );
-//       })
-//     }
-//   )
-// }
-
-// export default Cart;
+export default Cart;
