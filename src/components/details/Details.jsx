@@ -64,9 +64,7 @@ function PageDetail() {
         </div>
       </div>
     </>
-
   );
-
 }
 
 export default PageDetail;
