@@ -1,5 +1,6 @@
-// import { useNavigate } from "react-router-dom";
-
-export function clearClick() {
+export function logOut(navigate) {
   localStorage.clear();
+  navigate("/");
 }
+
+export default logOut;
