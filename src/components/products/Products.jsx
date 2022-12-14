@@ -77,7 +77,6 @@ function Products() {
 			event.target.fill = "green";
 			event.target.stroke = "green";
 
-
 			let newCart = cart.filter(prod => product.id !== prod.id);
 			setCart(newCart);
 			localStorage.setItem("Favourites", JSON.stringify(newCart));
@@ -100,34 +99,36 @@ function Products() {
 	return (
 		<>
 			<img src={logo} alt="" className="App-logo" />
-			<label>
-				<input type="checkbox" checked={checked.action} onChange={handleActionChange} className="genre-search" />
-				Action
-			</label>
-
-			<label>
-				<input type="checkbox" checked={checked.sport} onChange={handleSportChange} className="genre-search" />
-				Sport
-			</label>
-
-			<label>
-				<input type="checkbox" checked={checked.sim} onChange={handleSimulationChange} className="genre-search" />
-				Simulation
-			</label>
-
-			<button onClick={() => logOut(navigate)} className="link-tag">
+			<button onClick={() => logOut(navigate)} className="logout-btn">
 				Log Out
 			</button>
-			<Link to={`/cart`} className="link-tag">
+			<Link to={`/cart`} className="cart-link">
 				Cart({cart.length})
 			</Link>
+
 
 			{loading &&
 				<div style={{ width: "100%", textAlign: "center" }}>
 					<Spinner animation="border" className="spinner" />
 				</div>
 			}
+			
+			<div className="search">
+			<label className="search-label">
+				<input type="checkbox" checked={checked.action} onChange={handleActionChange} className="genre-search" />
+				Action
+			</label>
 
+			<label className="search-label">
+				<input type="checkbox" checked={checked.sport} onChange={handleSportChange} className="genre-search" />
+				Sport
+			</label>
+
+			<label className="search-label">
+				<input type="checkbox" checked={checked.sim} onChange={handleSimulationChange} className="genre-search" />
+				Simulation
+			</label>
+			</div>
 			<Container className="container">
 				{filteredProducts.map(function (product) {
 					// console.log(product);
@@ -135,19 +136,18 @@ function Products() {
 
 					return (
 						<div className="products-container" key={product.id}>
-							<div>
-								<img src={imagePath} alt={product.title} className="product-img" />
-								<BsFillCartFill className="fav-button" onClick={(event) => addToCart(event, product)} />
-								{/* <BsFillCartCheckFill className="fav-button" style={{ color: "red", pointerEvents: "none" }} /> */}
-							</div>
-							<div className="title-tag">
-								<h5 key={product.attributes.title}>{product.attributes.title}</h5>
-							</div>
-							<div className="link-tag">
-								<Link to={`product/${product.id}`} className="link-page">
+							<BsFillCartFill className="fav-button" onClick={(event) => addToCart(event, product)} />
+							<Link to={`product/${product.id}`} className="link-page">
+								<div>
+									<img src={imagePath} alt={product.title} className="product-img" />
+								</div>
+								<div className="title-tag">
+									<h5 key={product.attributes.title}>{product.attributes.title}</h5>
+								</div>
+								<div className="link-tag">
 									View more
-								</Link>
-							</div>
+								</div>
+							</Link>
 						</div>
 					);
 				})}

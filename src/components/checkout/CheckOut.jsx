@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import ValidationError from "../../common/FormErrors";
@@ -18,7 +18,6 @@ const schema = yup.object().shape({
 
 
 function CheckOut() {
-  const [cart, setCart] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [checkoutError, setCheckoutError] = useState(null);
@@ -28,32 +27,14 @@ function CheckOut() {
     resolver: yupResolver(schema),
   });
 
-  // const itemsInCart = (product) => {
-  //   const cartItems = JSON.parse(localStorage.getItem("Favourites"));
-  //   setCart([...cart, product]);
-  // };
   const numItems = JSON.parse(localStorage.getItem("Favourites")).length;
 
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   setSubmitting(false);
-  //   setCheckoutError(null);
-  //   let timeout;
-  //   if (showModal) {
-  //     timeout = setTimeout(() => {
-  //       setShowModal(false);
-  //       // navigate("/");
-  //     }, modalDisplayTime);
-  //   }
-  //   return () => clearTimeout(timeout);
-  // }, [navigate, showModal]);
 
   const handleForm = (event) => {
     setSubmitting(true);
     handleShowModal();
     console.log(event);
-    //  event.preventDefault();
   }
 
   const handleCloseModal = () => {
@@ -98,15 +79,12 @@ function CheckOut() {
               {errors.creditcard && <ValidationError>{errors.creditcard.message}</ValidationError>}
               <Form.Control required type="text" {...register('creditcard')} placeholder="Credit Card" />
             </Form.Group>
-            {/* <Button className='checkoutButton' type="submit" onClick={handleClick}>
-              {submitting ? "Confirming" : "Confirm Checkout"}
-            </Button> */}
+           
             <Button className='checkoutButton' type="submit">
               {submitting ? "Confirming" : "Confirm Checkout"}
             </Button>
           </fieldset>
         </Form>
-
 
         <Modal
           show={showModal}
