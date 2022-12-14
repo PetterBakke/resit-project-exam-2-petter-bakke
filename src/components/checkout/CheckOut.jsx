@@ -6,14 +6,15 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Container } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
+import Spinner from 'react-bootstrap/Spinner';
 
 const schema = yup.object().shape({
   fullname: yup.string().required("Please enter your full name"),
   address: yup.string().required("Please enter your address"),
-  creditcard: yup.string().required("Please enter your credit card number"),
+  creditcard: yup.string().required("Please enter your credit card number").min(16, "Number must have 16 digits").max(16, "Number must have 16 digits"),
 });
-
-const modalDisplayTime = 1500;
 
 
 function CheckOut() {
@@ -21,68 +22,116 @@ function CheckOut() {
   const [showModal, setShowModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [checkoutError, setCheckoutError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const itemsInCart = (product) => {
-		const cartItems = JSON.parse(localStorage.getItem("Favourites"));
-		console.log("This item is in the cart");
-		setCart([...cart, product]);
-	};
-
-  
+  // const itemsInCart = (product) => {
+  //   const cartItems = JSON.parse(localStorage.getItem("Favourites"));
+  //   setCart([...cart, product]);
+  // };
+  const numItems = JSON.parse(localStorage.getItem("Favourites")).length;
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setSubmitting(false);
-    setCheckoutError(null);
-    let timeout;
-    if (showModal) {
-      timeout = setTimeout(() => {
-        setShowModal(false);
-        navigate("/");
-      }, modalDisplayTime);
-    }
-    return () => clearTimeout(timeout);
-  }, [navigate, showModal]);
+  // useEffect(() => {
+  //   setSubmitting(false);
+  //   setCheckoutError(null);
+  //   let timeout;
+  //   if (showModal) {
+  //     timeout = setTimeout(() => {
+  //       setShowModal(false);
+  //       // navigate("/");
+  //     }, modalDisplayTime);
+  //   }
+  //   return () => clearTimeout(timeout);
+  // }, [navigate, showModal]);
 
-  const handleClick = () => {
+  const handleForm = (event) => {
+    setSubmitting(true);
+    handleShowModal();
+    console.log(event);
+    //  event.preventDefault();
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSubmitting(false);
+  }
+  const handleShowModal = () => {
     setShowModal(true);
+  }
+
+  const handleConfirm = () => {
+    setLoading(true);
+    setSubmitting(false);
+    localStorage.clear();
+    setTimeout(() => {
+      navigate("/");
+    }, 800)
   }
 
   return (
     <>
-    <h5 className='checkout-cart'>{itemsInCart.length}</h5>
-    <Form onSubmit={handleSubmit}>
-      <fieldset disabled={submitting}>
+      <Container >
+        <h5 className='checkout-cart'>{numItems}</h5>
+        <Form noValidate onSubmit={handleSubmit(handleForm)}>
+          <fieldset disabled={submitting}>
 
-    {checkoutError && <ValidationError>{checkoutError}</ValidationError>}
-      <Form.Group className="mb-3" controlId="formBasicFullName">
-        <Form.Label {...register('fullname')} className="form-labels">Full name</Form.Label>
-        {errors.username && <ValidationError>{errors.fullname.message}</ValidationError>}
-        <Form.Control type="full name" placeholder="Enter Full Name" />
-      </Form.Group>
+            {checkoutError && <ValidationError>{checkoutError}</ValidationError>}
+            <Form.Group className="mb-3" controlId="formBasicFullName">
+              <Form.Label className="form-labels">Full name</Form.Label>
+              {errors.fullname && <ValidationError>{errors.fullname.message}</ValidationError>}
+              <Form.Control required type="text" {...register('fullname')} placeholder="Enter Full Name" />
+            </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicAddress">
-        <Form.Label {...register('address')} className="form-labels">Address</Form.Label>
-        {errors.username && <ValidationError>{errors.address.message}</ValidationError>}
-        <Form.Control type="address" placeholder="Address" />
-      </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicAddress">
+              <Form.Label className="form-labels">Address</Form.Label>
+              {errors.address && <ValidationError>{errors.address.message}</ValidationError>}
+              <Form.Control required type="text" {...register('address')} placeholder="Address" />
+            </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicCreditCard">
-        <Form.Label {...register('creditcard')} className="form-labels">Credit card details</Form.Label>
-        {errors.username && <ValidationError>{errors.creditcard.message}</ValidationError>}
-        <Form.Control type="credit card" placeholder="Credit Card" />
-      </Form.Group>
-      <Button variant="primary" type="submit" onClick={handleClick}>
-        {submitting ? "Confirming" : "Confirm Checkout"}
-      </Button>
-      {showModal && <div>Checkout is Confirmed! You will be redirecte to homepage</div>}
-      </fieldset>
-    </Form>
+            <Form.Group className="mb-3" controlId="formBasicCreditCard">
+              <Form.Label className="form-labels">Credit card details</Form.Label>
+              {errors.creditcard && <ValidationError>{errors.creditcard.message}</ValidationError>}
+              <Form.Control required type="text" {...register('creditcard')} placeholder="Credit Card" />
+            </Form.Group>
+            {/* <Button className='checkoutButton' type="submit" onClick={handleClick}>
+              {submitting ? "Confirming" : "Confirm Checkout"}
+            </Button> */}
+            <Button className='checkoutButton' type="submit">
+              {submitting ? "Confirming" : "Confirm Checkout"}
+            </Button>
+          </fieldset>
+        </Form>
+
+
+        <Modal
+          show={showModal}
+          onHide={handleCloseModal}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header>
+            <Modal.Title>Confirmation</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to confirm the order?
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseModal}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleConfirm}>
+              {loading && <Spinner animation="border" size="sm" />}
+              Confirm
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+      </Container>
     </>
   );
 }

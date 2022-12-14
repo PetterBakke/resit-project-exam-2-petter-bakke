@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo.png";
 import neon from '../../assets/Neon city.png';
 import golf from '../../assets/The golf.png';
 import space from '../../assets/Space adventure.png';
@@ -8,6 +9,7 @@ import space from '../../assets/Space adventure.png';
 function Home() {
   return (
     <>
+    <img src={logo} alt="" className='App-logo'/>
         <Carousel className='img-slider'>
           <Carousel.Item>
             <img className="d-flex justify-content-center" width={300} height={450}

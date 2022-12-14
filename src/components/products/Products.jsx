@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { BASE_URL, BASE_URI } from "../../constants/api";
 import { Container } from "react-bootstrap";
-import { BsFillCartPlusFill, BsFillCartCheckFill } from "react-icons/bs";
+import { BsFillCartFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import logOut from "../logout/LogOut";
 import { useNavigate } from "react-router-dom";
+import Spinner from 'react-bootstrap/Spinner';
+import logo from "../../assets/logo.png";
 
 function Products() {
 	const [cart, setCart] = useState([]);
 	const [checked, setChecked] = useState({ action: false, sport: false, sim: false });
 	const [products, setProducts] = useState([]);
 	const [filteredProducts, setFilteredProducts] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	let navigate = useNavigate();
 
@@ -22,16 +24,17 @@ function Products() {
 				const response = await fetch(BASE_URL);
 
 				if (response.ok) {
+					setLoading(true);
 					const json = await response.json();
-					// console.log(json.data);
-					setProducts(json.data);
+					setTimeout(() => { setProducts(json.data); setLoading(false); }, 500);
 				} else {
 					setError("An error occured");
 				}
 			} catch (error) {
 				setError(error.toString());
-			} finally {
-				setLoading(false);
+			}
+			finally {
+				//
 			}
 		}
 		fetchProducts();
@@ -39,7 +42,6 @@ function Products() {
 
 	useEffect(filterProductsOnGenre, [checked, products]);
 	function filterProductsOnGenre() {
-
 		let filteredProds = products.filter((prod) => (
 			(checked.action && prod.attributes.genre === "Action") ||
 			(checked.sport && prod.attributes.genre === "Sport") ||
@@ -53,21 +55,33 @@ function Products() {
 		}
 	}
 
-	if (loading) {
-		return <div>Loading...</div>;
-	}
-
 	if (error) {
 		return <div>Error: An error occured</div>;
 	}
 
-	const addToCart = (product) => {
+	const addToCart = (event, product) => {
 
 		if (cart.filter(prod => product.id === prod.id).length === 0) {
 
-			localStorage.setItem("Favourites", JSON.stringify(product));
-			console.log("This item is in the cart");
+			event.target.style.color = "red";
+			event.target.fill = "red";
+			event.target.stroke = "red";
+
 			setCart([...cart, product]);
+			localStorage.setItem("Favourites", JSON.stringify([...cart, product]));
+			console.log("This item is in the cart");
+		}
+		else {
+
+			event.target.style.color = "green";
+			event.target.fill = "green";
+			event.target.stroke = "green";
+
+
+			let newCart = cart.filter(prod => product.id !== prod.id);
+			setCart(newCart);
+			localStorage.setItem("Favourites", JSON.stringify(newCart));
+
 		}
 	};
 
@@ -85,6 +99,7 @@ function Products() {
 
 	return (
 		<>
+			<img src={logo} alt="" className="App-logo" />
 			<label>
 				<input type="checkbox" checked={checked.action} onChange={handleActionChange} className="genre-search" />
 				Action
@@ -106,18 +121,24 @@ function Products() {
 			<Link to={`/cart`} className="link-tag">
 				Cart({cart.length})
 			</Link>
+
+			{loading &&
+				<div style={{ width: "100%", textAlign: "center" }}>
+					<Spinner animation="border" className="spinner" />
+				</div>
+			}
+
 			<Container className="container">
 				{filteredProducts.map(function (product) {
 					// console.log(product);
-
 					const imagePath = `${BASE_URI}${product.attributes.image.data[0].attributes.formats.medium.url}`;
 
 					return (
 						<div className="products-container" key={product.id}>
 							<div>
 								<img src={imagePath} alt={product.title} className="product-img" />
-								<BsFillCartPlusFill className="fav-button" onClick={() => addToCart(product)} style={{ color: "green", pointerEvents: "all" }} />
-								<BsFillCartCheckFill className="fav-button" style={{ color: "red", pointerEvents: "none" }} />
+								<BsFillCartFill className="fav-button" onClick={(event) => addToCart(event, product)} />
+								{/* <BsFillCartCheckFill className="fav-button" style={{ color: "red", pointerEvents: "none" }} /> */}
 							</div>
 							<div className="title-tag">
 								<h5 key={product.attributes.title}>{product.attributes.title}</h5>

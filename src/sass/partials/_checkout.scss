@@ -14,3 +14,17 @@
 Form {
   margin: 10px;
 }
+
+.checkoutButton {
+  background-color: $button-color;
+  border: 0;
+}
+
+.checkoutModal {
+  background-color: $ui-color;
+  display: block;
+  position: absolute;
+  top: 50%;
+  width: 50%;
+  color: $text-color;
+}

@@ -37,7 +37,10 @@ p {
 
 .fav-button {
   margin-bottom: 190px;
-  color: $ui-color;
+  // color: $ui-color;
+  color: green;
+  pointer-events: all;
+  cursor: pointer;
 }
 
 .title-tag {
@@ -60,14 +63,15 @@ p {
   text-decoration: none;
 }
 
-.fav-button {
-  cursor: pointer;
-}
-
 .genre-search {
   margin: 20px;
 }
 
 Label {
+  color: $ui-color;
+}
+
+.spinner {
+  text-align: center;
   color: $ui-color;
 }
