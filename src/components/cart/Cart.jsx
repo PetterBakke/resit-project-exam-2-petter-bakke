@@ -24,7 +24,9 @@ function Cart() {
 
   return (
     <>
+    <div className="logo-container">
       <img src={logo} alt="" className="App-logo" />
+    </div>
       <div className="cart-container">
 
         {cartItems ?
@@ -43,8 +45,8 @@ function Cart() {
           :
           <div>No products in cart. Please add some.</div>}
 
+          <Link to={`/checkout`} className="checkout-tag" style={cartItems ? { pointerEvents: "all" } : { pointerEvents: "none" }}>Checkout</Link>
       </div>
-      <Link to={`/checkout`} className="checkout-tag" style={cartItems ? { pointerEvents: "all" } : { pointerEvents: "none" }}>Checkout</Link>
     </>
   )
 }

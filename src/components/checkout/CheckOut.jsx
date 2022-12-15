@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Container } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Spinner from 'react-bootstrap/Spinner';
+import logo from "../../assets/logo.png";
 
 const schema = yup.object().shape({
   fullname: yup.string().required("Please enter your full name"),
@@ -20,7 +21,7 @@ const schema = yup.object().shape({
 function CheckOut() {
   const [showModal, setShowModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [checkoutError, setCheckoutError] = useState(null);
+  const [checkoutError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -56,8 +57,11 @@ function CheckOut() {
 
   return (
     <>
-      <Container >
-        <h5 className='checkout-cart'>{numItems}</h5>
+    <div className='logo-container'>
+      <img src={logo} alt="" className="App-logo" />
+    </div>
+      <Container>
+        <h5 className='checkout-cart'>Number of items in cart: {numItems}</h5>
         <Form noValidate onSubmit={handleSubmit(handleForm)}>
           <fieldset disabled={submitting}>
 

@@ -1,7 +1,7 @@
 import { Details_url, BASE_URI } from "../../constants/api";
 import { BsFillCartFill } from "react-icons/bs";
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
 function PageDetail() {
@@ -16,8 +16,8 @@ function PageDetail() {
 
   useEffect(function () {
     if (JSON.parse(localStorage.getItem("Favourites"))) {
-			setCart(JSON.parse(localStorage.getItem("Favourites")));
-		}
+      setCart(JSON.parse(localStorage.getItem("Favourites")));
+    }
   }, []);
 
   useEffect(function () {
@@ -70,10 +70,12 @@ function PageDetail() {
   return (
 
     <>
-      <img src={logo} alt="" className="App-logo" />
-       <p>
-        Cart({cart.length})   
-        </p> 
+      <div className="logo-container">
+        <img src={logo} alt="" className="App-logo" />
+      </div>
+      <p>
+        Cart({cart.length})
+      </p>
       <div className='page-detail'>
         <div className='flex-child'>
           <h1 key={product.data.attributes.title} className="heading">{product.data.attributes.title}</h1>

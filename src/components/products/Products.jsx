@@ -97,6 +97,7 @@ function Products() {
 		<>
 			<div className="logo-container">
 				<img src={logo} alt="" className="App-logo" />
+			
 				<button onClick={() => logOut(navigate)} className="logout-btn">
 					Log Out
 				</button>
@@ -104,9 +105,8 @@ function Products() {
 					Cart({cart.length})
 				</Link>
 			</div>
-			<div className="button-container">
 
-			</div>
+			
 
 			{loading &&
 				<div style={{ width: "100%", textAlign: "center" }}>

@@ -52,7 +52,7 @@ p {
 .logo-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width:fit-content;
+  width: fit-content;
   height: auto;
   margin: auto;
 }
@@ -69,7 +69,7 @@ p {
   margin: 15px;
   border-radius: 5px;
   margin: auto;
- 
+
 }
 
 .cart-link {
@@ -79,7 +79,7 @@ p {
   margin: 15px;
   border-radius: 5px;
   margin: auto;
-  
+
 }
 
 .title-tag {
@@ -103,25 +103,25 @@ p {
   text-decoration: none;
 }
 
-// .search {
-//   height: auto;
-//   margin: auto;
-//   display: flex;
-//   justify-content: center;
-  
-// }
+.search {
+  height: auto;
+  margin: auto;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+
+}
 
 .search-label {
-  display: flex;
   color: $ui-color;
   padding: 10px;
   margin: 10px;
 }
 
-.genre-search {
-  height: 20px;
-  margin-left: 10px;
-}
+// .genre-search {
+//   height: 20px;
+//   margin-left: 10px;
+// }
 
 .spinner {
   text-align: center;

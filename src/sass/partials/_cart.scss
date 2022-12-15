@@ -28,11 +28,20 @@
     grid-template-columns: 1fr 1fr;
     gap: 1.2rem;
   }
+
+  .checkout-tag {
+    margin: auto;
+  }
 }
 
 @media screen and (max-width: 600px) {
   .cart-container {
     grid-template-columns: 1fr;
     gap: 1rem;
+    margin: 0;
+  }
+
+  .checkout-tag {
+    margin: auto;
   }
 }
