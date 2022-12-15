@@ -48,7 +48,7 @@ function CheckOut() {
   const handleConfirm = () => {
     setLoading(true);
     setSubmitting(false);
-    localStorage.clear();
+    localStorage.setItem("Favourites", JSON.stringify([]));
     setTimeout(() => {
       navigate("/");
     }, 800)
@@ -79,7 +79,7 @@ function CheckOut() {
               {errors.creditcard && <ValidationError>{errors.creditcard.message}</ValidationError>}
               <Form.Control required type="text" {...register('creditcard')} placeholder="Credit Card" />
             </Form.Group>
-           
+
             <Button className='checkoutButton' type="submit">
               {submitting ? "Confirming" : "Confirm Checkout"}
             </Button>

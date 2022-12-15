@@ -49,6 +49,19 @@ p {
   }
 }
 
+.logo-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width:fit-content;
+  height: auto;
+  margin: auto;
+}
+
+// .button-container {
+//   display: flex;
+//   justify-content: flex-end;
+// }
+
 .logout-btn {
   width: fit-content;
   background-color: $button-color;
@@ -56,6 +69,7 @@ p {
   margin: 15px;
   border-radius: 5px;
   margin: auto;
+ 
 }
 
 .cart-link {
@@ -65,6 +79,7 @@ p {
   margin: 15px;
   border-radius: 5px;
   margin: auto;
+  
 }
 
 .title-tag {
@@ -111,4 +126,18 @@ p {
 .spinner {
   text-align: center;
   color: $ui-color;
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }

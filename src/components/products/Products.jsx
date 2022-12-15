@@ -19,6 +19,12 @@ function Products() {
 	let navigate = useNavigate();
 
 	useEffect(function () {
+		if (JSON.parse(localStorage.getItem("Favourites"))) {
+			setCart(JSON.parse(localStorage.getItem("Favourites")));
+		}
+	}, []);
+
+	useEffect(function () {
 		async function fetchProducts() {
 			try {
 				const response = await fetch(BASE_URL);
@@ -39,6 +45,7 @@ function Products() {
 		}
 		fetchProducts();
 	}, []);
+
 
 	useEffect(filterProductsOnGenre, [checked, products]);
 	function filterProductsOnGenre() {
@@ -62,21 +69,11 @@ function Products() {
 	const addToCart = (event, product) => {
 
 		if (cart.filter(prod => product.id === prod.id).length === 0) {
-
-			event.target.style.color = "red";
-			event.target.fill = "red";
-			event.target.stroke = "red";
-
 			setCart([...cart, product]);
 			localStorage.setItem("Favourites", JSON.stringify([...cart, product]));
 			console.log("This item is in the cart");
 		}
 		else {
-
-			event.target.style.color = "green";
-			event.target.fill = "green";
-			event.target.stroke = "green";
-
 			let newCart = cart.filter(prod => product.id !== prod.id);
 			setCart(newCart);
 			localStorage.setItem("Favourites", JSON.stringify(newCart));
@@ -98,45 +95,54 @@ function Products() {
 
 	return (
 		<>
-			<img src={logo} alt="" className="App-logo" />
-			<button onClick={() => logOut(navigate)} className="logout-btn">
-				Log Out
-			</button>
-			<Link to={`/cart`} className="cart-link">
-				Cart({cart.length})
-			</Link>
+			<div className="logo-container">
+				<img src={logo} alt="" className="App-logo" />
+				<button onClick={() => logOut(navigate)} className="logout-btn">
+					Log Out
+				</button>
+				<Link to={`/cart`} className="cart-link">
+					Cart({cart.length})
+				</Link>
+			</div>
+			<div className="button-container">
 
+			</div>
 
 			{loading &&
 				<div style={{ width: "100%", textAlign: "center" }}>
 					<Spinner animation="border" className="spinner" />
 				</div>
 			}
-			
+
 			<div className="search">
-			<label className="search-label">
-				<input type="checkbox" checked={checked.action} onChange={handleActionChange} className="genre-search" />
-				Action
-			</label>
+				<label className="search-label">
+					<input type="checkbox" checked={checked.action} onChange={handleActionChange} className="genre-search" />
+					Action
+				</label>
 
-			<label className="search-label">
-				<input type="checkbox" checked={checked.sport} onChange={handleSportChange} className="genre-search" />
-				Sport
-			</label>
+				<label className="search-label">
+					<input type="checkbox" checked={checked.sport} onChange={handleSportChange} className="genre-search" />
+					Sport
+				</label>
 
-			<label className="search-label">
-				<input type="checkbox" checked={checked.sim} onChange={handleSimulationChange} className="genre-search" />
-				Simulation
-			</label>
+				<label className="search-label">
+					<input type="checkbox" checked={checked.sim} onChange={handleSimulationChange} className="genre-search" />
+					Simulation
+				</label>
 			</div>
 			<Container className="container">
 				{filteredProducts.map(function (product) {
-					// console.log(product);
 					const imagePath = `${BASE_URI}${product.attributes.image.data[0].attributes.formats.medium.url}`;
 
 					return (
 						<div className="products-container" key={product.id}>
-							<BsFillCartFill className="fav-button" onClick={(event) => addToCart(event, product)} />
+
+							<BsFillCartFill className="fav-button" onClick={(event) => addToCart(event, product)}
+								style={cart.filter(prod => product.id === prod.id).length === 0 ? { color: "green" } : { color: "red" }}
+							// fill={cart.filter(prod => product.id === prod.id).length === 0 ? "green" : "red"}
+							// stroke={cart.filter(prod => product.id === prod.id).length === 0 ? "green" : "red"}
+							/>
+
 							<Link to={`product/${product.id}`} className="link-page">
 								<div>
 									<img src={imagePath} alt={product.title} className="product-img" />
