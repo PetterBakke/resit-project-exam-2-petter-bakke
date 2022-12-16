@@ -27,25 +27,26 @@ function Cart() {
     <div className="logo-container">
       <img src={logo} alt="" className="App-logo" />
     </div>
-      <div className="cart-container">
-
-        {cartItems ?
-          cartItems.map(function (item) {
-            let imagePath = `${BASE_URI}${item.attributes.image.data[0].attributes.formats.medium.url}`;
-
-            return (
-              <div className="cart-items" key={item.id}>
-                <BsFillCartXFill className="remove-btn" onClick={() => removeFromCart(item)} />
-                <h5>{item.attributes.title}</h5>
-                <img src={imagePath} alt={item.title} className="product-img" />
-                <p>{item.attributes.price}</p>
-              </div>
-            )
-          })
-          :
-          <div>No products in cart. Please add some.</div>}
-
-          <Link to={`/checkout`} className="checkout-tag" style={cartItems ? { pointerEvents: "all" } : { pointerEvents: "none" }}>Checkout</Link>
+      <div className="container-cart">
+          <h1 className="title-heading">Cart</h1>
+        <div className="cart-container">
+          {cartItems ?
+            cartItems.map(function (item) {
+              let imagePath = `${BASE_URI}${item.attributes.image.data[0].attributes.formats.medium.url}`;
+              
+              return (
+                <div className="cart-items" key={item.id}>
+                  <BsFillCartXFill className="remove-btn" onClick={() => removeFromCart(item)} />
+                  <h5>{item.attributes.title}</h5>
+                  <img src={imagePath} alt={item.title} className="product-img" />
+                  <p>{item.attributes.price}</p>
+                </div>
+              )
+            })
+            :
+            <div>No products in cart.</div>}
+        </div>
+            <Link to={`/checkout`} className="checkout-tag" style={cartItems ? { pointerEvents: "all" } : { pointerEvents: "none" }}>Checkout</Link>
       </div>
     </>
   )

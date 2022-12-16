@@ -60,9 +60,6 @@ function PageDetail() {
       setCart(newCart);
       localStorage.setItem("Favourites", JSON.stringify(newCart));
     }
-    // localStorage.setItem("Favourites", JSON.stringify(product));
-    // console.log("This item is in the cart");
-    // setCart([...cart, product]);
   };
 
   const imagePath = `${BASE_URI}${product.data.attributes.image.data[0].attributes.url}`;
@@ -73,20 +70,16 @@ function PageDetail() {
       <div className="logo-container">
         <img src={logo} alt="" className="App-logo" />
       </div>
-      <p>
-        Cart({cart.length})
-      </p>
       <div className='page-detail'>
         <div className='flex-child'>
-          <h1 key={product.data.attributes.title} className="heading">{product.data.attributes.title}</h1>
-          <img src={imagePath} alt="This is the product cover" className="product-img" />
-          <BsFillCartFill className="fav-button" onClick={() => addToCart(product)}
+          <BsFillCartFill className="fav-button-details" onClick={() => addToCart(product)}
             style={cart.filter(prod => product.id === prod.id).length === 0 ? { color: "green" } : { color: "red" }}
           />
-        </div>
-        <div className='subgrid'>
+          <h2 key={product.data.attributes.title} className="heading">{product.data.attributes.title}</h2>
+          <img src={imagePath} alt={product.data.attributes.title} className="detail-img" />
           <p className='heading-description'>{product.data.attributes.description}</p>
         </div>
+        
       </div>
     </>
   );

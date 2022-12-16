@@ -1,10 +1,10 @@
 .page-detail {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
   align-items: center;
   align-content: center;
   gap: 10px;
   margin: 10px;
-  flex-wrap: wrap;
 }
 
 .detail-img {
@@ -12,18 +12,30 @@
   height: 250px;
 }
 
-.flex-child {
-  align-self: flex-start;
-}
-
-// .subgrid {
-//   order: 2;
-// }
-
-.heading-description {
+.heading {
   color: $ui-color;
 }
 
-.p-title {
+.flex-child {
+  align-self: flex-start;
+  align-content: center;
+}
+
+.fav-button-details {
+  color: green;
+  pointer-events: all;
+  cursor: pointer;
+  left: 110px;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.subgrid {
+  margin: 10px;
+}
+
+.heading-description {
   color: $ui-color;
 }

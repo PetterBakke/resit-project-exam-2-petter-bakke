@@ -57,9 +57,10 @@ function CheckOut() {
 
   return (
     <>
-    <div className='logo-container'>
-      <img src={logo} alt="" className="App-logo" />
-    </div>
+      <div className='logo-container'>
+        <img src={logo} alt="" className="App-logo" />
+      </div>
+      <h1 className="title-heading">Checkout</h1>
       <Container>
         <h5 className='checkout-cart'>Number of items in cart: {numItems}</h5>
         <Form noValidate onSubmit={handleSubmit(handleForm)}>

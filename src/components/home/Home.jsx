@@ -32,8 +32,7 @@ function Home() {
         </Carousel>
         <div className='browse-button'>
           <Link to="/login" className='browse-link'>Sign in |</Link>
-          <Link to="/register" className='browse-link'>Sign up |</Link>
-          <Link to="/products" className='browse-link'>Browse</Link>
+          <Link to="/register" className='browse-link'>Sign up</Link>
         </div>
     </>
   );
