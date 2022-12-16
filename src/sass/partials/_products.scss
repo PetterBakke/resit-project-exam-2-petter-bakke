@@ -130,4 +130,8 @@ p {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+
+  .logout-btn {
+    width: min-content;
+  }
 }

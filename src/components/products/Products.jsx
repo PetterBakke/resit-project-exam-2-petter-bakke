@@ -139,8 +139,6 @@ function Products() {
 
 							<BsFillCartFill className="fav-button" onClick={(event) => addToCart(event, product)}
 								style={cart.filter(prod => product.id === prod.id).length === 0 ? { color: "green" } : { color: "red" }}
-							// fill={cart.filter(prod => product.id === prod.id).length === 0 ? "green" : "red"}
-							// stroke={cart.filter(prod => product.id === prod.id).length === 0 ? "green" : "red"}
 							/>
 
 							<Link to={`product/${product.id}`} className="link-page">
